@@ -95,28 +95,21 @@ class Auth extends CI_Controller
 			$email = $this->input->post('email', true);
 			$username = $this->input->post('username', true);
 			$password = $this->input->post('password', true);
-			$confirm_password = $this->input->post('confirm_password', true);
 
-			if ($password == $confirm_password) {
-				$data = [
-					'username' => $username,
-					'nama_lengkap' => $nama_lengkap,
-					'email' => $email,
-					'id_role' => 3,
-					'is_active' => 1,
-					'image' => 'user.png',
-					'password' => password_hash($password, PASSWORD_DEFAULT),
-				];
+			$data = [
+				'username' => $username,
+				'nama_lengkap' => $nama_lengkap,
+				'email' => $email,
+				'id_role' => 2,
+				'is_active' => 1,
+				'image' => 'user.png',
+				'password' => password_hash($password, PASSWORD_DEFAULT),
+			];
 
-				$this->user->save($data);
-				$this->alert->set('success', 'Success', 'Register Berhasl');
+			$this->user->save($data);
+			$this->alert->set('success', 'Success', 'Register Berhasl');
 
-				redirect('auth', 'refresh');
-			} else {
-				$this->alert->set('warning', 'Warning', 'Password Gak sama');
-
-				redirect('auth/register', 'refresh');
-			}
+			redirect('auth', 'refresh');
 		}
 	}
 
